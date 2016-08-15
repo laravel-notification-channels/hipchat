@@ -17,9 +17,9 @@ class HipChatServiceProvider extends ServiceProvider
             ->give(function () {
                 return new HipChat(
                     new HttpClient,
-                    config('services.hipChat.url'),
-                    config('services.hipChat.token'),
-                    config('services.hipChat.room')
+                    config('services.hipchat.url'),
+                    config('services.hipchat.token'),
+                    config('services.hipchat.room')
                 );
             });
     }
