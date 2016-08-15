@@ -37,7 +37,7 @@ You must install the service provider:
 // config/app.php
 'providers' => [
     ...
-    NotificationChannels\Hipchat\HipchatProvider::class,
+    NotificationChannels\HipChat\HipChatProvider::class,
 ];
 ```
 ### Setting up the HipChat service
@@ -59,8 +59,8 @@ Add your HipChat Account Token and optionally the default room and Hipchat API s
 ## Usage
 
 ``` php
-use NotificationChannels\Hipchat\HipchatChannel;
-use NotificationChannels\Hipchat\HipchatMessage;
+use NotificationChannels\HipChat\HipChatChannel;
+use NotificationChannels\HipChat\HipChatMessage;
 use Illuminate\Notifications\Notification;
 
 class UserRegistered extends Notification
