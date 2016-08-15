@@ -4,6 +4,7 @@ namespace NotificationChannels\HipChat\Exceptions;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
+use NotificationChannels\HipChat\HipChatMessage;
 
 class CouldNotSendNotification extends Exception
 {
