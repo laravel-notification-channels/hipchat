@@ -67,12 +67,12 @@ class UserRegistered extends Notification
 {
     public function via($notifiable)
     {
-        return [HipchatChannel::class];
+        return [HipChatChannel::class];
     }
 
-    public function toHipchat($notifiable)
+    public function toHipChat($notifiable)
     {
-        return new HipchatMessage::create("<strong>A new user has registered!</strong>")
+        return new HipChatMessage::create("<strong>A new user has registered!</strong>")
             ->room('New Registrations')
             ->sucess()
             ->notify()
