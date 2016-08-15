@@ -133,7 +133,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
             ->html()
             ->content('<strong>Foo</strong>')
             ->notify();
-        
+
         $this->assertEquals([
             'from' => 'Bar',
             'message_format' => 'html',

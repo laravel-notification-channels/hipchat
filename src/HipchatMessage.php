@@ -77,6 +77,7 @@ class HipchatMessage
 
         return $this;
     }
+
     /**
      * Indicate that the notification gives general information.
      *
