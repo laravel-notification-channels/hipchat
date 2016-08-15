@@ -4,7 +4,7 @@ namespace NotificationChannels\HipChat\Test;
 
 use NotificationChannels\HipChat\HipChatMessage;
 
-class HipChatMessageTest extends \PHPUnit_Framework_TestCase
+class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 {
     public function test_it_can_be_instantiated()
     {

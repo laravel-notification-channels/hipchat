@@ -24,7 +24,7 @@ class CouldNotSendNotification extends Exception
     {
         $class = get_class($message) ?: 'Unknown';
 
-        return new static("Notification was not sent. The message should be an instance of or extend " . HipChatMessage::class . ". `Given {$class}` is invalid.");
+        return new static('Notification was not sent. The message should be an instance of or extend '.HipChatMessage::class.". `Given {$class}` is invalid.");
     }
 
     public static function internalError()
