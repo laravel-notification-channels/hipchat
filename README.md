@@ -83,7 +83,7 @@ class UserRegistered extends Notification
 
 ### Available methods
 
-#### HipchatMessage
+#### HipChatMessage
 
 - `room()`: Specifies the room (id or name) to send the notification to.
 - `from()`: Sets the optional label to be shown in addition to the sender's name.
