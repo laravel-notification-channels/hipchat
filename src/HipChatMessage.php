@@ -28,7 +28,7 @@ class HipChatMessage
     /**
      * Should a message trigger a user notification in a HipChat client.
      *
-     * @var string
+     * @var bool
      */
     public $notify = false;
 
