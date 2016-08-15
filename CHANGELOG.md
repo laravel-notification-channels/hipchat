@@ -4,5 +4,10 @@ All Notable changes to `laravel-notification-channels/hipchat` will be documente
 
 ## [Unreleased]
 
-## [1.0.0] - 201X-XX-XX
-- Initial release
+## [0.0.2] - 2016-08-15
+
+### Added
+- Added `create` method for `HipChatMessage`.
+
+## [0.0.1] - 2016-08-15
+- Experimental release
