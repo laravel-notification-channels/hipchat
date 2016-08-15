@@ -56,6 +56,17 @@ class HipChatMessage
     /**
      * Create a new instance of HipChatMessage.
      *
+     * @param string $content
+     * @return static
+     */
+    public static function create($content = '')
+    {
+        return new static($content);
+    }
+
+    /**
+     * Create a new instance of HipChatMessage.
+     *
      * @param $content
      */
     public function __construct($content = '')

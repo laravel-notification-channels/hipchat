@@ -20,6 +20,14 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Foo', $message->content);
     }
 
+    public function test_it_supports_create_method()
+    {
+        $message = HipChatMessage::create('Foo');
+
+        $this->assertInstanceOf(HipChatMessage::class, $message);
+        $this->assertEquals('Foo', $message->content);
+    }
+
     public function test_it_sets_proper_defaults_when_instantiated()
     {
         $message = new HipChatMessage;
