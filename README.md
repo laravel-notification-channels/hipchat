@@ -72,12 +72,11 @@ class UserRegistered extends Notification
 
     public function toHipchat($notifiable)
     {
-        return (new HipchatMessage())
+        return new HipchatMessage::create("<strong>A new user has registered!</strong>")
             ->room('New Registrations')
             ->sucess()
             ->notify()
-            ->html()
-            ->content("<strong>A new user has registered!</strong>");
+            ->html();
     }
 }
 ```

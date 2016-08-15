@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\Hipchat\Events;
+namespace NotificationChannels\HipChat\Events;
 
 use Illuminate\Notifications\Notification;
 

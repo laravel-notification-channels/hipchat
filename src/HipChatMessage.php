@@ -1,11 +1,11 @@
 <?php
 
-namespace NotificationChannels\Hipchat;
+namespace NotificationChannels\HipChat;
 
-class HipchatMessage
+class HipChatMessage
 {
     /**
-     * Hipchat room.
+     * HipChat room.
      *
      * @var string
      */
@@ -26,7 +26,7 @@ class HipchatMessage
     public $format = 'text';
 
     /**
-     * Should a message trigger a user notification in a Hipchat client.
+     * Should a message trigger a user notification in a HipChat client.
      *
      * @var string
      */
@@ -54,7 +54,7 @@ class HipchatMessage
     public $content = '';
 
     /**
-     * Create a new instance of HipchatMessage.
+     * Create a new instance of HipChatMessage.
      *
      * @param $content
      */
@@ -66,7 +66,7 @@ class HipchatMessage
     }
 
     /**
-     * Set the Hipchat room to send message to.
+     * Set the HipChat room to send message to.
      *
      * @param $room
      * @return $this
@@ -118,7 +118,7 @@ class HipchatMessage
     }
 
     /**
-     * Set the from label of the Hipchat message.
+     * Set the from label of the HipChat message.
      *
      * @param  string  $from
      * @return $this
@@ -131,7 +131,7 @@ class HipchatMessage
     }
 
     /**
-     * Set HTML format of the Hipchat message.
+     * Set HTML format of the HipChat message.
      *
      * @return $this
      */
@@ -143,7 +143,7 @@ class HipchatMessage
     }
 
     /**
-     * Set text format of the Hipchat message.
+     * Set text format of the HipChat message.
      *
      * @return $this
      */
@@ -155,7 +155,7 @@ class HipchatMessage
     }
 
     /**
-     * Should a message trigger a user notification in a Hipchat client.
+     * Should a message trigger a user notification in a HipChat client.
      *
      * @param  bool  $notify
      * @return $this

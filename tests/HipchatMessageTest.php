@@ -1,28 +1,28 @@
 <?php
 
-namespace NotificationChannels\Hipchat\Test;
+namespace NotificationChannels\HipChat\Test;
 
-use NotificationChannels\Hipchat\HipchatMessage;
+use NotificationChannels\HipChat\HipChatMessage;
 
-class HipchatMessageTest extends \PHPUnit_Framework_TestCase
+class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 {
     public function test_it_can_be_instantiated()
     {
-        $message = new HipchatMessage;
+        $message = new HipChatMessage;
 
-        $this->assertInstanceOf(HipchatMessage::class, $message);
+        $this->assertInstanceOf(HipChatMessage::class, $message);
     }
 
     public function test_it_can_accept_content_when_created()
     {
-        $message = new HipchatMessage('Foo');
+        $message = new HipChatMessage('Foo');
 
         $this->assertEquals('Foo', $message->content);
     }
 
     public function test_it_sets_proper_defaults_when_instantiated()
     {
-        $message = new HipchatMessage;
+        $message = new HipChatMessage;
 
         $this->assertEquals('text', $message->format);
         $this->assertEquals('info', $message->level);
@@ -32,7 +32,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_room()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->room('Room');
 
         $this->assertEquals('Room', $message->room);
@@ -40,7 +40,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_from()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->from('Bar');
 
         $this->assertEquals('Bar', $message->from);
@@ -48,7 +48,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_text_content()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->content('Foo Bar');
 
         $this->assertEquals('Foo Bar', $message->content);
@@ -56,7 +56,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_html_content()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->content('<strong>Foo</strong> Bar');
 
         $this->assertEquals('<strong>Foo</strong> Bar', $message->content);
@@ -64,7 +64,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_color()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->color('yellow');
 
         $this->assertEquals('yellow', $message->color);
@@ -72,7 +72,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_text_format()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->text();
 
         $this->assertEquals('text', $message->format);
@@ -80,7 +80,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_html_format()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->html();
 
         $this->assertEquals('html', $message->format);
@@ -88,7 +88,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_notify_flag()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->notify();
 
         $this->assertTrue($message->notify);
@@ -100,7 +100,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_info_level()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->info();
 
         $this->assertEquals('info', $message->level);
@@ -109,7 +109,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_success_level()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->success();
 
         $this->assertEquals('success', $message->level);
@@ -118,7 +118,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_error_level()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->error();
 
         $this->assertEquals('error', $message->level);
@@ -127,7 +127,7 @@ class HipchatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_transforms_to_array()
     {
-        $message = (new HipchatMessage)
+        $message = (new HipChatMessage)
             ->from('Bar')
             ->error()
             ->html()

@@ -1,17 +1,18 @@
 <?php
 
-namespace NotificationChannels\Hipchat\Exceptions;
+namespace NotificationChannels\HipChat\Exceptions;
 
+use Exception;
 use GuzzleHttp\Exception\ClientException;
 
-class CouldNotSendNotification extends \Exception
+class CouldNotSendNotification extends Exception
 {
-    public static function hipchatRespondedWithAnError(ClientException $exception)
+    public static function hipChatRespondedWithAnError(ClientException $exception)
     {
         $code = $exception->getResponse()->getStatusCode();
         $message = $exception->getResponse()->getBody();
 
-        return new static("Hipchat responded with an error `{$code} - {$message}`");
+        return new static("HipChat responded with an error `{$code} - {$message}`");
     }
 
     public static function missingTo()
@@ -23,11 +24,11 @@ class CouldNotSendNotification extends \Exception
     {
         $class = get_class($message) ?: 'Unknown';
 
-        return new static("Notification was not sent. Message object class `{$class}` is invalid.");
+        return new static("Notification was not sent. The message should be an instance of or extend " . HipChatMessage::class . ". `Given {$class}` is invalid.");
     }
 
     public static function internalError()
     {
-        return new static('Couldn\'t connect to Hipchat API.');
+        return new static("Couldn't connect to HipChat API.");
     }
 }

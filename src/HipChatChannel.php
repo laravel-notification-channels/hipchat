@@ -1,30 +1,28 @@
 <?php
 
-namespace NotificationChannels\Hipchat;
+namespace NotificationChannels\HipChat;
 
 use GuzzleHttp\Exception\ClientException;
-use NotificationChannels\Hipchat\Events\MessageWasSent;
-use NotificationChannels\Hipchat\Events\SendingMessage;
+use NotificationChannels\HipChat\Events\MessageWasSent;
+use NotificationChannels\HipChat\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
-use NotificationChannels\Hipchat\Exceptions\CouldNotSendNotification;
+use NotificationChannels\HipChat\Exceptions\CouldNotSendNotification;
 
-class HipchatChannel
+class HipChatChannel
 {
     /**
-     * The Hipchat client instance.
+     * The HipChat client instance.
      *
-     * @var \NotificationChannels\Hipchat\Hipchat
+     * @var \NotificationChannels\HipChat\HipChat
      */
-    protected $hipchat;
+    protected $hipChat;
 
     /**
-     * Create a HipchatChannel instance.
-     *
-     * @param \NotificationChannels\Hipchat\Hipchat
+     * @param \NotificationChannels\HipChat\HipChat
      */
-    public function __construct(Hipchat $hipchat)
+    public function __construct(HipChat $hipChat)
     {
-        $this->hipchat = $hipchat;
+        $this->hipChat = $hipChat;
     }
 
     /**
@@ -33,22 +31,22 @@ class HipchatChannel
      * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      *
-     * @throws \NotificationChannels\Hipchat\Exceptions\CouldNotSendNotification
+     * @throws \NotificationChannels\HipChat\Exceptions\CouldNotSendNotification
      */
     public function send($notifiable, Notification $notification)
     {
-        $message = $notification->toHipchat($notifiable);
+        $message = $notification->toHipChat($notifiable);
 
         if (is_string($message)) {
-            $message = new HipchatMessage($message);
+            $message = new HipChatMessage($message);
         }
 
-        if (! in_array(get_class($message), [HipchatMessage::class])) {
+        if (! is_a($message, HipChatMessage::class)) {
             throw CouldNotSendNotification::invalidMessageObject($message);
         }
 
-        $to = $message->room ?: $notifiable->routeNotificationFor('hipchat');
-        if (! $to = $to ?: $this->hipchat->room()) {
+        $to = $message->room ?: $notifiable->routeNotificationFor('hipChat');
+        if (! $to = $to ?: $this->hipChat->room()) {
             throw CouldNotSendNotification::missingTo();
         }
 
@@ -59,7 +57,7 @@ class HipchatChannel
         try {
             $this->sendMessage($to, $message);
         } catch (ClientException $exception) {
-            throw CouldNotSendNotification::hipchatRespondedWithAnError($exception);
+            throw CouldNotSendNotification::hipChatRespondedWithAnError($exception);
         } catch (\Exception $exception) {
             throw CouldNotSendNotification::internalError();
         }
@@ -68,7 +66,7 @@ class HipchatChannel
     }
 
     /**
-     * Send the Hipchat notification message.
+     * Send the HipChat notification message.
      *
      * @param $to
      * @param mixed $message
@@ -76,8 +74,8 @@ class HipchatChannel
      */
     protected function sendMessage($to, $message)
     {
-        if ($message instanceof HipchatMessage) {
-            return $this->hipchat->sendMessage($to, $message->toArray());
+        if ($message instanceof HipChatMessage) {
+            return $this->hipChat->sendMessage($to, $message->toArray());
         }
     }
 }

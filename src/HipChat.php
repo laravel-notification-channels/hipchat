@@ -1,34 +1,24 @@
 <?php
 
-namespace NotificationChannels\Hipchat;
+namespace NotificationChannels\HipChat;
 
 use GuzzleHttp\Client as HttpClient;
 
-class Hipchat
+class HipChat
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $token;
 
-    /**
-     * @var HttpClient
-     */
+    /** @var HttpClient */
     protected $http;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $url;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     protected $room;
 
     /**
-     * Create a new instance of the Hipchat client.
-     *
      * @param HttpClient $http
      * @param string $token
      * @param string|null $url
@@ -36,7 +26,7 @@ class Hipchat
     public function __construct(HttpClient $http, $url, $token, $room)
     {
         $this->http = $http;
-        $this->url = rtrim($url ?: 'https://api.hipchat.com', '/');
+        $this->url = rtrim($url ?: 'https://api.hipChat.com', '/');
         $this->token = $token;
         $this->room = $room;
     }
@@ -52,7 +42,7 @@ class Hipchat
     }
 
     /**
-     * Returns Hipchat base url.
+     * Returns HipChat base url.
      *
      * @return string
      */
