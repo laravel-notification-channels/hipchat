@@ -27,6 +27,7 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('text', $message->format);
         $this->assertEquals('info', $message->level);
         $this->assertEquals('gray', $message->color);
+
         $this->assertFalse($message->notify);
     }
 
