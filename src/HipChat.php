@@ -26,7 +26,7 @@ class HipChat
     public function __construct(HttpClient $http, $url, $token, $room)
     {
         $this->http = $http;
-        $this->url = rtrim($url ?: 'https://api.hipChat.com', '/');
+        $this->url = rtrim($url ?: 'https://api.hipchat.com', '/');
         $this->token = $token;
         $this->room = $room;
     }
