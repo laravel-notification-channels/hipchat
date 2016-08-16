@@ -1,6 +1,6 @@
 # Changelog
 
-All Notable changes to `laravel-notification-channels/hipchat` will be documented in this file
+All notable changes to `laravel-notification-channels/hipchat` will be documented in this file
 
 ## [Unreleased]
 
