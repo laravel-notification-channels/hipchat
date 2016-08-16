@@ -80,7 +80,6 @@ class HipChatFileTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('File sent.', $file->content);
     }
 
-
     public function test_it_sets_file_content()
     {
         $file = HipChatFile::create()
@@ -139,6 +138,7 @@ class HipChatFileTest extends \PHPUnit_Framework_TestCase
     protected function pathFromResource($resource)
     {
         $meta = stream_get_meta_data($resource);
+
         return isset($meta['uri']) ? $meta['uri'] : null;
     }
 }

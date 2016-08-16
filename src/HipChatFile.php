@@ -21,21 +21,21 @@ class HipChatFile
     /**
      * File content.
      * Can be a resource, stream, string.
-     * 
+     *
      * @var mixed
      */
     public $fileContent;
 
     /**
-     * A new file name for the file. 
-     * 
+     * A new file name for the file.
+     *
      * @var string
      */
     public $fileName = '';
 
     /**
      * A valid mime type of the file content.
-     * 
+     *
      * @var string
      */
     public $fileType = '';
@@ -47,7 +47,7 @@ class HipChatFile
      */
     public function __construct($path = '')
     {
-        if (!empty($path)) {
+        if (! empty($path)) {
             $this->path($path);
         }
     }
@@ -66,12 +66,13 @@ class HipChatFile
     /**
      * Set the HipChat room to share the file in.
      *
-     * @param string|integer $room
+     * @param string|int $room
      * @return $this
      */
     public function room($room)
     {
         $this->room = $room;
+
         return $this;
     }
 
@@ -84,6 +85,7 @@ class HipChatFile
     public function content($content)
     {
         $this->content = trim($content);
+
         return $this;
     }
 
@@ -139,7 +141,7 @@ class HipChatFile
 
         return $this;
     }
-    
+
     /**
      * Set the new name of the file.
      *
@@ -149,6 +151,7 @@ class HipChatFile
     public function fileName($fileName)
     {
         $this->fileName = $fileName;
+
         return $this;
     }
 
@@ -160,7 +163,8 @@ class HipChatFile
      */
     public function fileType($fileType)
     {
-        $this->fileType= $fileType;
+        $this->fileType = $fileType;
+
         return $this;
     }
 
@@ -188,6 +192,7 @@ class HipChatFile
     protected function getTypeFromResource($resource)
     {
         $meta = stream_get_meta_data($resource);
+
         return isset($meta['mediatype']) ? $meta['mediatype'] : null;
     }
 }

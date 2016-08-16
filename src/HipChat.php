@@ -90,7 +90,7 @@ class HipChat
             'filename' => $file['filename'] ?: 'untitled',
         ];
 
-        if (!empty($file['message'])) {
+        if (! empty($file['message'])) {
             $parts[] = [
                 'headers' => [
                     'Content-Type' => 'application/json',
@@ -138,7 +138,7 @@ class HipChat
 
         $request = new Request('POST', $url, $headers, $body, $version);
 
-        $changeContentType['set_headers']['Content-Type'] = 'multipart/related; boundary=' . $request->getBody()->getBoundary();
+        $changeContentType['set_headers']['Content-Type'] = 'multipart/related; boundary='.$request->getBody()->getBoundary();
 
         $request = modify_request($request, $changeContentType);
 
