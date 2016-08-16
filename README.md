@@ -100,7 +100,7 @@ You can optionally send a text message along the way
 public function toHipChat($notifiable)
 {
     return new HipChatFile::create($this->user->photo);
-        ->text('Look we've got a new user!');
+        ->text("Look we've got a new user!");
 }
 ```
 
@@ -113,7 +113,7 @@ public function toHipChat($notifiable)
         ->fileName('user_photo.png')
         ->fileType('image/png')
         ->fileContent(fopen('http://example.com/user/photo/johndoe', 'r'))
-        ->text('Look we've got a new user!');
+        ->text("Look we've got a new user!");
 }
 ```
 
