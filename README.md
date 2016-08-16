@@ -39,7 +39,7 @@ You must install the service provider:
 'providers' => [
     ...
     NotificationChannels\HipChat\HipChatProvider::class,
-];
+],
 ```
 ### Setting up the HipChat service
 
@@ -47,14 +47,15 @@ Add your HipChat Account Token and optionally the default room and Hipchat API s
 
 ```php
 // config/services.php
-
-    'hipchat' => [
-        'token' => env('HIPCHAT_TOKEN'),
-        // Default room (optional)
-        'room' => 'Notifications',
-        // Base URL for Hipchat API server (optional)
-        'url' => 'https://api.your.hipchat.server.com',
-    ]
+...
+'hipchat' => [
+    'token' => env('HIPCHAT_TOKEN'),
+    // Default room (optional)
+    'room' => 'Notifications',
+    // Base URL for Hipchat API server (optional)
+    'url' => 'https://api.your.hipchat.server.com',
+],
+...
 ```
 
 ## Usage
