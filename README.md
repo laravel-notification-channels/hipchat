@@ -60,9 +60,9 @@ Add your HipChat Account Token and optionally the default room and Hipchat API s
 
 ## Usage
 
-### Sending a HipChat Message Notification
+### Sending a room notification
 
-> _**Note**: In order to be able to share files you would need an auth token (both personal and room tokens will work) with the [send_notification](https://developer.atlassian.com/hipchat/guide/hipchat-rest-api/api-scopes) scope.
+> _**Note**: In order to be able to send room notifications you would need an auth token (both personal and room tokens will work) with the [send_notification](https://developer.atlassian.com/hipchat/guide/hipchat-rest-api/api-scopes) scope._
 
 ``` php
 use NotificationChannels\HipChat\HipChatChannel;
