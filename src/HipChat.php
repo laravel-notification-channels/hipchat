@@ -3,6 +3,10 @@
 namespace NotificationChannels\HipChat;
 
 use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Psr7\MultipartStream;
+use GuzzleHttp\Psr7\Request;
+use function GuzzleHttp\Psr7\modify_request;
+use function GuzzleHttp\Psr7\stream_for;
 
 class HipChat
 {
@@ -54,28 +58,91 @@ class HipChat
     /**
      * Send a message.
      *
-     * @param $to
-     * @param $message
+     * @param string|int $to
+     * @param array $message
      * @return \Psr\Http\Message\ResponseInterface
      */
     public function sendMessage($to, $message)
     {
-        return $this->request($this->getMessageUrl($to), [
+        $url = $this->url.'/v2/room/'.urlencode($to).'/notification';
+
+        return $this->post($url, [
             'headers' => $this->getHeaders(),
             'json' => $message,
         ]);
     }
 
     /**
-     * Make a request.
+     * Share a file.
+     *
+     * @param string|int $to
+     * @param array $file
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function shareFile($to, $file)
+    {
+        $parts[] = [
+            'headers' => [
+                'Content-Type' => $file['file_type'] ?: 'application/octet-stream',
+            ],
+            'name' => 'file',
+            'contents' => stream_for($file['content']),
+            'filename' => $file['filename'] ?: 'untitled',
+        ];
+
+        if (!empty($file['message'])) {
+            $parts[] = [
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                ],
+                'name' => 'metadata',
+                'contents' => json_encode(['message' => $file['message']]),
+            ];
+        }
+
+        $url = $this->url.'/v2/room/'.urlencode($to).'/share/file';
+
+        return $this->postMultipartRelated($url, [
+            'headers' => $this->getHeaders(),
+            'multipart' => $parts,
+        ]);
+    }
+
+    /**
+     * Make a simple post request.
      *
      * @param string $url
      * @param array $options
      * @return \Psr\Http\Message\ResponseInterface
      */
-    protected function request($url, $options)
+    protected function post($url, $options)
     {
         return $this->http->post($url, $options);
+    }
+
+    /**
+     * Make a multipart/related request.
+     * Unfortunately Guzzle doesn't support multipart/related requests out of the box.
+     *
+     * @param $url
+     * @param $options
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    protected function postMultipartRelated($url, $options)
+    {
+        $headers = isset($options['headers']) ? $options['headers'] : [];
+
+        $body = new MultipartStream($options['multipart']);
+
+        $version = isset($options['version']) ? $options['version'] : '1.1';
+
+        $request = new Request('POST', $url, $headers, $body, $version);
+
+        $changeContentType['set_headers']['Content-Type'] = 'multipart/related; boundary=' . $request->getBody()->getBoundary();
+
+        $request = modify_request($request, $changeContentType);
+
+        return $this->http->send($request);
     }
 
     /**
@@ -88,16 +155,5 @@ class HipChat
         return [
             'Authorization' => 'Bearer '.$this->token,
         ];
-    }
-
-    /**
-     * Get room notification url.
-     *
-     * @param string $to
-     * @return string
-     */
-    protected function getMessageUrl($to)
-    {
-        return $this->url.'/v2/room/'.urlencode($to).'/notification';
     }
 }

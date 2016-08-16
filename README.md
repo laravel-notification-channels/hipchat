@@ -60,6 +60,7 @@ Add your HipChat Account Token and optionally the default room and Hipchat API s
 
 ## Usage
 
+### Sending a HipChat Message Notification
 ``` php
 use NotificationChannels\HipChat\HipChatChannel;
 use NotificationChannels\HipChat\HipChatMessage;
@@ -83,6 +84,39 @@ class UserRegistered extends Notification
 }
 ```
 
+### Sharing a file in a HipChat room
+
+In a lot of cases all you need just a path to an exisiting file you want to share
+``` php
+public function toHipChat($notifiable)
+{
+    return new HipChatFile::create($this->user->photo);
+}
+```
+
+You can optionally send a text message along the way
+
+``` php
+public function toHipChat($notifiable)
+{
+    return new HipChatFile::create($this->user->photo);
+        ->text('Look we've got a new user!');
+}
+```
+
+If you need more control and/or you're creating the content of the file on the fly
+
+``` php
+public function toHipChat($notifiable)
+{
+    return new HipChatFile::create()
+        ->fileName('user_photo.png')
+        ->fileType('image/png')
+        ->fileContent(fopen('http://example.com/user/photo/johndoe', 'r'))
+        ->text('Look we've got a new user!');
+}
+```
+
 ### Available methods
 
 #### HipChatMessage
@@ -98,6 +132,14 @@ class UserRegistered extends Notification
 - `success()`: Sets notification level to `success` and color to `green`.
 - `error()`: Sets notification level to `info` and color to `red`.
 
+### HipChatFile
+
+- `room()`: Specifies the room (id or name) to share the file in.
+- `path()`: Sets the `fileContent` to the resource of the existing file and tries to detect and set the `fileName` and `fileType` if they weren't explicitely set.
+- `fileName`: Sets the name of the file.
+- `fileContent`: Explicitely sets the content of the file. It can be a string, stream or a file resource. If a resource was passed it tries to detect and set the `fileType` if it wasn't explicitely set.
+- `fileType`: Explicitely sets the content (mime) type of the file.
+- `text()`: Sets a text message to be sent along with the file.
 
 ## Testing
 

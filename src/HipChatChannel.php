@@ -39,11 +39,11 @@ class HipChatChannel
             $message = new HipChatMessage($message);
         }
 
-        if (! is_a($message, HipChatMessage::class)) {
+        if (! in_array(get_class($message), [HipChatMessage::class, HipChatFile::class])) {
             throw CouldNotSendNotification::invalidMessageObject($message);
         }
 
-        $to = $message->room ?: $notifiable->routeNotificationFor('hipChat');
+        $to = $message->room ?: $notifiable->routeNotificationFor('HipChat');
         if (! $to = $to ?: $this->hipChat->room()) {
             throw CouldNotSendNotification::missingTo();
         }
@@ -68,6 +68,10 @@ class HipChatChannel
     {
         if ($message instanceof HipChatMessage) {
             return $this->hipChat->sendMessage($to, $message->toArray());
+        }
+
+        if ($message instanceof HipChatFile) {
+            return $this->hipChat->shareFile($to, $message->toArray());
         }
     }
 }
