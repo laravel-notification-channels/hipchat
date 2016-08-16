@@ -6,6 +6,7 @@
 [![StyleCI](https://styleci.io/repos/65714660/shield)](https://styleci.io/repos/65714660)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/1af9cfed-e62d-405a-b06d-9071d2f8bee8.svg?style=flat-square)](https://insight.sensiolabs.com/projects/1af9cfed-e62d-405a-b06d-9071d2f8bee8)
 [![Quality Score](https://img.shields.io/scrutinizer/g/laravel-notification-channels/hipchat.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/hipchat)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/hipchat/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/hipchat/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/hipchat.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/hipchat)
 
 This package makes it easy to send [HipChat notifications](https://www.hipchat.com) with Laravel 5.3.
@@ -98,7 +99,7 @@ class UserRegistered extends Notification
 
 
 ## Testing
-    
+
 ``` bash
 $ composer test
 ```
