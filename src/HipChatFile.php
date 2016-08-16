@@ -108,7 +108,7 @@ class HipChatFile
      */
     public function path($path)
     {
-        if (empty($this->filename)) {
+        if (empty($this->fileName)) {
             $this->fileName(basename($path));
         }
 
