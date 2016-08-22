@@ -202,7 +202,7 @@ class HipChatMessage
 
     /**
      * Set the color for the message.
-     * Allowed values: yellow, green, red, purple, gray, random
+     * Allowed values: yellow, green, red, purple, gray, random.
      *
      * @param $color
      * @return string
