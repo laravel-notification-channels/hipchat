@@ -130,8 +130,8 @@ public function toHipChat($notifiable)
 - `room()`: Specifies the room (id or name) to send the notification to.
 - `from()`: Sets the optional label to be shown in addition to the sender's name.
 - `content()`: Sets a content of the notification message.
-- `text()`: Sets the content format to plain text.
-- `html()`: Sets the content format to html. Allowed HTML tags: a, b, i, strong, em, br, img, pre, code, lists, tables.
+- `text()`: Sets the format to plain text and optionally the content.
+- `html()`: Sets the format to html and optionally the content. Allowed HTML tags: a, b, i, strong, em, br, img, pre, code, lists, tables.
 - `color()`: Sets the color for the message. Allowed values: yellow, green, red, purple, gray, random.
 - `notify()`: Specifies if a message should trigger a user notification in a Hipchat client.
 - `info()`: Sets notification level to `info` and color to `gray`.
