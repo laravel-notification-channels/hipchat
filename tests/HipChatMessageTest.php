@@ -79,20 +79,44 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('yellow', $message->color);
     }
 
-    public function test_it_can_set_text_format()
+    public function test_it_can_set_text_format_without_affecting_content()
     {
         $message = (new HipChatMessage)
+            ->content('Foo')
             ->text();
 
         $this->assertEquals('text', $message->format);
+        $this->assertEquals('Foo', $message->content);
     }
 
-    public function test_it_can_set_html_format()
+    public function test_it_can_set_text_format_along_with_content()
     {
         $message = (new HipChatMessage)
+            ->content('Foo')
+            ->text('Bar');
+
+        $this->assertEquals('text', $message->format);
+        $this->assertEquals('Bar', $message->content);
+    }
+
+    public function test_it_can_set_html_format_without_affecting_content()
+    {
+        $message = (new HipChatMessage)
+            ->content('<strong>Foo</strong>')
             ->html();
 
         $this->assertEquals('html', $message->format);
+        $this->assertEquals('<strong>Foo</strong>', $message->content);
+    }
+
+    public function test_it_can_set_html_format_along_with_content()
+    {
+        $message = (new HipChatMessage)
+            ->content('<strong>Foo</strong>')
+            ->html('<strong>Bar</strong>');
+
+        $this->assertEquals('html', $message->format);
+        $this->assertEquals('<strong>Bar</strong>', $message->content);
     }
 
     public function test_it_can_set_notify_flag()

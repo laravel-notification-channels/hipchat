@@ -71,15 +71,13 @@ class HipChatMessage
      */
     public function __construct($content = '')
     {
-        if (! empty($content)) {
-            $this->content($content);
-        }
+        $this->content($content);
     }
 
     /**
      * Set the HipChat room to send message to.
      *
-     * @param $room
+     * @param int|string $room
      * @return $this
      */
     public function room($room)
@@ -136,31 +134,41 @@ class HipChatMessage
      */
     public function from($from)
     {
-        $this->from = $from;
+        $this->from = trim($from);
 
         return $this;
     }
 
     /**
-     * Set HTML format of the HipChat message.
+     * Set HTML format and optionally the content.
      *
+     * @param string $content
      * @return $this
      */
-    public function html()
+    public function html($content = '')
     {
         $this->format = 'html';
 
+        if (! empty($content)) {
+            $this->content($content);
+        }
+
         return $this;
     }
 
     /**
-     * Set text format of the HipChat message.
+     * Set text format and optionally the content.
      *
+     * @param string $content
      * @return $this
      */
-    public function text()
+    public function text($content = '')
     {
         $this->format = 'text';
+
+        if (! empty($content)) {
+            $this->content($content);
+        }
 
         return $this;
     }
@@ -187,14 +195,16 @@ class HipChatMessage
      */
     public function content($content)
     {
-        $this->content = $content;
+        $this->content = trim($content);
 
         return $this;
     }
 
     /**
      * Set the color for the message.
+     * Allowed values: yellow, green, red, purple, gray, random
      *
+     * @param $color
      * @return string
      */
     public function color($color)
