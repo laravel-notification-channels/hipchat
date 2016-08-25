@@ -407,7 +407,7 @@ class Card
         }
 
         if (! empty($this->attributes)) {
-            $card['attributes'] = array_map(function ($attribute) {
+            $card['attributes'] = array_map(function (CardAttribute $attribute) {
                 return $attribute->toArray();
             }, $this->attributes);
         }
