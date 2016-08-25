@@ -270,8 +270,8 @@ class Card
      *
      * @param string $icon
      * @param string|null $icon2
-     * @param string|null $width
-     * @param string|null $height
+     * @param int|null $width
+     * @param int|null $height
      * @return $this
      */
     public function thumbnail($icon, $icon2 = null, $width = null, $height = null)
