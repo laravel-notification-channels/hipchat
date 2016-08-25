@@ -16,6 +16,8 @@ class HipChatChannel
     protected $hipChat;
 
     /**
+     * Create a new instance of HipChatChannel.
+     *
      * @param \NotificationChannels\HipChat\HipChat
      */
     public function __construct(HipChat $hipChat)
