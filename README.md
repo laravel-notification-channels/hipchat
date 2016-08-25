@@ -60,7 +60,7 @@ Add your HipChat Account Token and optionally the default room and Hipchat API s
 
 ## Usage
 
-### Sending a room notification
+### Sending a simple room notification
 
 > _**Note**: In order to be able to send room notifications you would need an auth token (both personal and room tokens will work) with the [send_notification](https://developer.atlassian.com/hipchat/guide/hipchat-rest-api/api-scopes) scope._
 
@@ -84,6 +84,45 @@ class UserRegistered extends Notification
             ->sucess()
             ->notify();
     }
+}
+```
+
+### Sending a room notification with a card
+Read more about HipChat notification cards [here](https://developer.atlassian.com/hipchat/guide/sending-messages#SendingMessages-UsingCards).
+
+```php
+public function toHipChat($notifiable)
+{
+    return HipChatMessage::create()
+        ->text('Laravel 5.3 has arrived!')
+        ->notify(true)
+        ->card(Card::create()
+            ->title('Laravel')
+            ->style(CardStyles::APPLICATION)
+            ->url('http://laravel.com')
+            ->html('Laravel 5.3 has arrived! The best release ever!')
+            ->cardFormat(CardFormats::MEDIUM)
+            ->icon('http://bit.ly/2c7ntiF')
+            ->activity('Laravel 5.3 has arrived!', 'http://bit.ly/2c7ntiF')
+            ->addAttribute(CardAttribute::create()
+                ->label('Laravel Scout')
+                ->icon('http://bit.ly/2c7ntiF')
+                ->value('Driver based full-text search.')
+                ->url('https://laravel.com/docs/5.3/scout')
+            )
+            ->addAttribute(CardAttribute::create()
+                ->label('Laravel Echo')
+                ->icon('http://bit.ly/2c7ntiF')
+                ->value('Event broadcasting, evolved.')
+                ->url('https://laravel.com/docs/5.3/broadcasting')
+            )
+            ->addAttribute(CardAttribute::create()
+                ->label('Laravel Passport')
+                ->icon('http://bit.ly/2c7ntiF')
+                ->value('API authentication.')
+                ->url('https://laravel.com/docs/5.3/passport')
+            )
+        );
 }
 ```
 
@@ -125,22 +164,44 @@ public function toHipChat($notifiable)
 
 ### Available methods
 
-#### HipChatMessage
-
-- `room()`: Specifies the room (id or name) to send the notification to.
+### `HipChatMessage`
+- `create()`: Creates a new `HipChatMessage` instance.
+- `room()`: Sets the id or name of the HipChat room to send the notification to.
 - `from()`: Sets the optional label to be shown in addition to the sender's name.
-- `content()`: Sets a content of the notification message.
+- `content()`: Sets the content of the notification message.
 - `text()`: Sets the format to plain text and optionally the content.
 - `html()`: Sets the format to html and optionally the content. Allowed HTML tags: a, b, i, strong, em, br, img, pre, code, lists, tables.
-- `color()`: Sets the color for the message. Allowed values: yellow, green, red, purple, gray, random.
+- `color()`: Sets the color of the message. See `MessageColors` for allowec values.
 - `notify()`: Specifies if a message should trigger a user notification in a Hipchat client.
-- `info()`: Sets notification level to `info` and color to `gray`.
-- `success()`: Sets notification level to `success` and color to `green`.
-- `error()`: Sets notification level to `info` and color to `red`.
+- `info()`: Sets notification level to `info` and color to `MessageColors::GRAY`.
+- `success()`: Sets notification level to `success` and color to `MessageColors::GREEN`.
+- `error()`: Sets notification level to `info` and color to `MessageColors::RED`.
 
-### HipChatFile
+#### `Card`
+- `create()`: Creates a new `Card` instance.
+- `title()`: Sets the title of the card.
+- `id()`: Sets the id of the card.
+- `style()`: Sets the style of the card. See `CardStyles` for allowed values.
+- `text()`: Sets the format to plain text and optionally the content.
+- `html()`: Sets the format to html and optionally the content.
+- `cardFormat()`: Sets the format of the card. See `CardFormats` for allowed values.
+- `url()`: Sets the url of the card.
+- `thumbnail()`: Sets the thumbnail of the card.
+- `activity()`: Sets the activity info of the card.
+- `icon()`: Sets the icon of the card.
+- `addAttribute()`: Adds a `CardAttribute` to the card.
 
-- `room()`: Specifies the room (id or name) to share the file in.
+#### `CardAttribute`
+- `create()`: Creates a new `CardAttribute` instance.
+- `value()`: Sets the textual value of the attribute.
+- `label()`: Sets the label of the attribute.
+- `url()`: Sets the url of the attribute.
+- `style()`: Sets the style of the attribute. See `CardAttributeStyles` for allowed values.
+- `icon()`: Sets the icon of the attribute.
+
+### `HipChatFile`
+- `create()`: Creates a new `HipChatFile` instance.
+- `room()`: Sets the id or name of the HipChat room to share the file in.
 - `path()`: Sets the `fileContent` to the resource of the existing file and tries to detect and set the `fileName` and `fileType` if they weren't explicitely set.
 - `fileName`: Sets the name of the file.
 - `fileContent`: Explicitely sets the content of the file. It can be a string, stream or a file resource. If a resource was passed it tries to detect and set the `fileType` if it wasn't explicitely set.
