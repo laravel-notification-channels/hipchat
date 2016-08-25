@@ -38,7 +38,7 @@ class CardAttributeTest extends \PHPUnit_Framework_TestCase
                 'icon' => [
                     'url' => 'http://example.com/qux',
                     'url@2x' => 'http://example.com/quux',
-                ]
+                ],
             ],
             'label' => 'foo',
         ], $attribute->toArray());
@@ -55,7 +55,7 @@ class CardAttributeTest extends \PHPUnit_Framework_TestCase
                 'label' => 'bar',
                 'icon' => [
                     'url' => 'http://example.com/qux',
-                ]
+                ],
             ],
         ], $attribute->toArray());
     }

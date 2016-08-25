@@ -43,6 +43,7 @@ class CardAttribute
     public function value($value)
     {
         $this->value = trim($value);
+
         return $this;
     }
 
@@ -55,6 +56,7 @@ class CardAttribute
     public function label($label)
     {
         $this->label = trim($label);
+
         return $this;
     }
 
@@ -65,6 +67,7 @@ class CardAttribute
     public function url($url)
     {
         $this->url = trim($url);
+
         return $this;
     }
 
@@ -77,11 +80,12 @@ class CardAttribute
     public function style($style)
     {
         $this->style = trim($style);
+
         return $this;
     }
 
     /**
-     * Sets the icon for the atttribute
+     * Sets the icon for the atttribute.
      *
      * @param string $icon
      * @param string|null $icon2
@@ -136,7 +140,7 @@ class CardAttribute
                 'style' => $this->style,
             ]),
         ];
-        
+
         if (! empty($this->icon)) {
             $attribute['value']['icon'] = array_filter([
                 'url' => $this->icon,
