@@ -242,12 +242,14 @@ class HipChatMessage
     {
         if ($card instanceof Card) {
             $this->card = $card;
+
             return $this;
         }
 
         if ($card instanceof \Closure) {
             $card($new = new Card());
             $this->card = $new;
+
             return $this;
         }
 

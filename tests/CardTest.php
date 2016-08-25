@@ -215,12 +215,12 @@ class CardTest extends \PHPUnit_Framework_TestCase
                 'html' => '<b>Activity content</b>',
                 'icon' => [
                     'url' => 'http://example.com/activity',
-                    'url@2x' => 'http://example.com/activity2'
+                    'url@2x' => 'http://example.com/activity2',
                 ],
             ],
             'icon' => [
                 'url' => 'http://example.com/icon',
-                'url@2x' => 'http://example.com/icon2'
+                'url@2x' => 'http://example.com/icon2',
             ],
             'attributes' => [$attribute->toArray()],
         ], $card->toArray());

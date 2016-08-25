@@ -162,6 +162,7 @@ class Card
     public function title($title)
     {
         $this->title = trim($title);
+
         return $this;
     }
 
@@ -174,6 +175,7 @@ class Card
     public function id($id)
     {
         $this->id = trim($id);
+
         return $this;
     }
 
@@ -186,6 +188,7 @@ class Card
     public function style($style)
     {
         $this->style = $style;
+
         return $this;
     }
 
@@ -198,6 +201,7 @@ class Card
     public function content($content)
     {
         $this->content = trim($content);
+
         return $this;
     }
 
@@ -244,6 +248,7 @@ class Card
     public function cardFormat($cardFormat)
     {
         $this->cardFormat = trim($cardFormat);
+
         return $this;
     }
 
@@ -256,6 +261,7 @@ class Card
     public function url($url)
     {
         $this->url = trim($url);
+
         return $this;
     }
 
@@ -338,12 +344,14 @@ class Card
     {
         if ($attribute instanceof CardAttribute) {
             $this->attributes[] = $attribute;
+
             return $this;
         }
 
         if ($attribute instanceof \Closure) {
             $attribute($new = new CardAttribute());
             $this->attributes[] = $new;
+
             return $this;
         }
 
