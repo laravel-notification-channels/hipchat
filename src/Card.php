@@ -202,6 +202,8 @@ class Card
     }
 
     /**
+     * Sets the format to plain text and optionally the content.
+     *
      * @param string $content
      * @return $this
      */
@@ -217,6 +219,8 @@ class Card
     }
 
     /**
+     * Sets the format to html and optionally the content.
+     *
      * @param string $content
      * @return $this
      */
@@ -325,7 +329,7 @@ class Card
     }
 
     /**
-     * Add an attribute to the Card.
+     * Adds a CardAttribute to the card.
      *
      * @param CardAttribute|\Closure $attribute
      * @return $this

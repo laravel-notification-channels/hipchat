@@ -35,6 +35,8 @@ class CardAttribute
     public $icon2;
 
     /**
+     * Sets the textual value of the attribute.
+     *
      * @param string $value
      * @return $this
      */
@@ -45,6 +47,8 @@ class CardAttribute
     }
 
     /**
+     * Sets the label of the attribute.
+     *
      * @param string $label
      * @return $this
      */
@@ -65,7 +69,7 @@ class CardAttribute
     }
 
     /**
-     * Sets the style for the CardAttribute.
+     * Sets the style for the attribute.
      *
      * @param string $style
      * @return $this
@@ -77,7 +81,7 @@ class CardAttribute
     }
 
     /**
-     * Sets the icon for the CardAtttribute
+     * Sets the icon for the atttribute
      *
      * @param string $icon
      * @param string|null $icon2
@@ -95,7 +99,7 @@ class CardAttribute
     }
 
     /**
-     * Create a new instance of the CardAttribute.
+     * Create a new instance of the attribute.
      *
      * @param string $label
      * @param string $value
@@ -112,7 +116,7 @@ class CardAttribute
     }
 
     /**
-     * Create a new instance of the CardAttribute.
+     * Create a new instance of the attribute.
      *
      * @param string $value
      * @param string $label
