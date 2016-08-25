@@ -2,7 +2,10 @@
 
 namespace NotificationChannels\HipChat\Test;
 
+use NotificationChannels\HipChat\Card;
+use NotificationChannels\HipChat\CardStyles;
 use NotificationChannels\HipChat\HipChatMessage;
+use NotificationChannels\HipChat\MessageColors;
 
 class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 {
@@ -41,7 +44,7 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_room()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->room('Room');
 
         $this->assertEquals('Room', $message->room);
@@ -49,7 +52,7 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_from()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->from('Bar');
 
         $this->assertEquals('Bar', $message->from);
@@ -57,7 +60,7 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_text_content()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->content('Foo Bar');
 
         $this->assertEquals('Foo Bar', $message->content);
@@ -65,7 +68,7 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_html_content()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->content('<strong>Foo</strong> Bar');
 
         $this->assertEquals('<strong>Foo</strong> Bar', $message->content);
@@ -73,15 +76,15 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_color()
     {
-        $message = (new HipChatMessage)
-            ->color('yellow');
+        $message = HipChatMessage::create()
+            ->color(MessageColors::YELLOW);
 
-        $this->assertEquals('yellow', $message->color);
+        $this->assertEquals(MessageColors::YELLOW, $message->color);
     }
 
     public function test_it_can_set_text_format_without_affecting_content()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->content('Foo')
             ->text();
 
@@ -91,7 +94,7 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_text_format_along_with_content()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->content('Foo')
             ->text('Bar');
 
@@ -101,7 +104,7 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_html_format_without_affecting_content()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->content('<strong>Foo</strong>')
             ->html();
 
@@ -111,7 +114,7 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_html_format_along_with_content()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->content('<strong>Foo</strong>')
             ->html('<strong>Bar</strong>');
 
@@ -121,7 +124,7 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_notify_flag()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->notify();
 
         $this->assertTrue($message->notify);
@@ -133,46 +136,80 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_can_set_info_level()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->info();
 
         $this->assertEquals('info', $message->level);
-        $this->assertEquals('gray', $message->color);
+        $this->assertEquals(MessageColors::GRAY, $message->color);
     }
 
     public function test_it_can_set_success_level()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->success();
 
         $this->assertEquals('success', $message->level);
-        $this->assertEquals('green', $message->color);
+        $this->assertEquals(MessageColors::GREEN, $message->color);
     }
 
     public function test_it_can_set_error_level()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
             ->error();
 
         $this->assertEquals('error', $message->level);
-        $this->assertEquals('red', $message->color);
+        $this->assertEquals(MessageColors::RED, $message->color);
     }
 
-    public function test_it_transforms_to_array()
+    public function test_it_can_set_card()
     {
-        $message = (new HipChatMessage)
+        $message = HipChatMessage::create()
+            ->card($card = Card::create());
+
+        $this->assertEquals($card, $message->card);
+    }
+
+    public function test_it_can_set_card_with_closure()
+    {
+        $message = HipChatMessage::create()
+            ->card(function (Card $card) {
+                $card->title('foo');
+            });
+
+        $this->assertEquals('foo', $message->card->title);
+    }
+
+    public function test_it_sets_attach_to()
+    {
+        $message = HipChatMessage::create()
+            ->attachTo($id = str_random());
+
+        $this->assertEquals($id, $message->attachTo);
+    }
+
+    public function test_it_transforms_to_array_with_card()
+    {
+        $message = HipChatMessage::create()
             ->from('Bar')
             ->error()
-            ->html()
-            ->content('<strong>Foo</strong>')
-            ->notify();
+            ->html('<strong>Foo</strong>')
+            ->notify()
+            ->card($card = Card::create()
+                ->id(str_random())
+                ->title('Card title')
+                ->style(CardStyles::APPLICATION)
+                ->text('Card content')
+            )
+            ->attachTo($id = str_random());
 
         $this->assertEquals([
             'from' => 'Bar',
             'message_format' => 'html',
-            'color' => 'red',
+            'color' => MessageColors::RED,
             'notify' => true,
             'message' => '<strong>Foo</strong>',
+            'attach_to' => $id,
+            'card' => $card->toArray(),
         ], $message->toArray());
     }
 }

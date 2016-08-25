@@ -5,7 +5,7 @@ namespace NotificationChannels\HipChat;
 class HipChatMessage
 {
     /**
-     * HipChat room.
+     * The HipChat room identifier.
      *
      * @var string
      */
@@ -52,6 +52,24 @@ class HipChatMessage
      * @var string
      */
     public $content = '';
+
+    /**
+     * An instance of Card object.
+     *
+     * @var Card
+     */
+    public $card;
+
+    /**
+     * The message id to to attach this notification to, for example if this notification is
+     * in response to a particular message. For supported clients, this will display the
+     * notification in the context of the referenced message specified by attach_to parameter.
+     * If this is not possible to attach the notification, it will be rendered as an unattached
+     * notification. The message must be in the same room as that the notification is sent to.
+     *
+     * @var string
+     */
+    public $attachTo;
 
     /**
      * Create a new instance of HipChatMessage.
@@ -214,14 +232,61 @@ class HipChatMessage
         return $this;
     }
 
+    /**
+     * Sets the Card.
+     *
+     * @param Card|\Closure|null $card
+     * @return $this
+     */
+    public function card($card)
+    {
+        if ($card instanceof Card) {
+            $this->card = $card;
+            return $this;
+        }
+
+        if ($card instanceof \Closure) {
+            $card($new = new Card());
+            $this->card = $new;
+            return $this;
+        }
+
+        throw new \InvalidArgumentException('Invalid Card type. Expected '.Card::class.' or '.\Closure::class.'.');
+    }
+
+    /**
+     * Sets the id of the "parent" message to attach this notification to.
+     *
+     * @param $id
+     * @return $this
+     */
+    public function attachTo($id)
+    {
+        $this->attachTo = trim($id);
+
+        return $this;
+    }
+
+    /**
+     * Get an array representation of the HipChatMessage.
+     *
+     * @return array
+     */
     public function toArray()
     {
-        return [
+        $message = array_filter([
             'from' => $this->from,
             'message_format' => $this->format,
             'color' => $this->color,
             'notify' => $this->notify,
             'message' => $this->content,
-        ];
+            'attach_to' => $this->attachTo,
+        ]);
+
+        if (! empty($this->card)) {
+            $message['card'] = $this->card->toArray();
+        }
+
+        return $message;
     }
 }
