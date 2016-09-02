@@ -1,4 +1,4 @@
-# HipChat Notifications Channel for Laravel 5.3 [WIP]
+# HipChat Notifications Channel for Laravel 5.3
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/hipchat.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/hipchat)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -38,7 +38,7 @@ You must install the service provider:
 // config/app.php
 'providers' => [
     ...
-    NotificationChannels\HipChat\HipChatProvider::class,
+    NotificationChannels\HipChat\HipChatServiceProvider::class,
 ],
 ```
 ### Setting up the HipChat service
