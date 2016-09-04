@@ -78,7 +78,7 @@ class UserRegistered extends Notification
 
     public function toHipChat($notifiable)
     {
-        return new HipChatMessage::create()
+        return HipChatMessage::create()
             ->room('New Registrations')
             ->html("<strong>A new user has registered!</strong>")
             ->sucess()
@@ -135,7 +135,7 @@ In majority of cases all you need is just a path to an exisiting file you want t
 ``` php
 public function toHipChat($notifiable)
 {
-    return new HipChatFile::create($this->user->photo);
+    return HipChatFile::create($this->user->photo);
 }
 ```
 
@@ -144,7 +144,7 @@ You can optionally send a text message along the way
 ``` php
 public function toHipChat($notifiable)
 {
-    return new HipChatFile::create($this->user->photo);
+    return HipChatFile::create($this->user->photo);
         ->text("Look we've got a new user!");
 }
 ```
@@ -154,7 +154,7 @@ If you need more control and/or you're creating the content of the file on the f
 ``` php
 public function toHipChat($notifiable)
 {
-    return new HipChatFile::create()
+    return HipChatFile::create()
         ->fileName('user_photo.png')
         ->fileType('image/png')
         ->fileContent(fopen('http://example.com/user/photo/johndoe', 'r'))
