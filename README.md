@@ -16,10 +16,13 @@ This package makes it easy to send [HipChat notifications](https://www.hipchat.c
 - [Installation](#installation)
 	- [Setting up the HipChat Service](#setting-up-the-hipchat-service)
 - [Usage](#usage)
-	- [Available Message methods](#available-message-methods)
-- [Changelog](#changelog)
+	- [Sending a simple room notification](#sending-a-simple-room-notification)
+    - [Sending a room notification with a card](#sending-a-room-notification-with-a-card)
+    - [Sharing a file in a HipChat room](#sharing-a-file-in-a-hipchat-room)
+    - [Available methods](#available-methods)
 - [Testing](#testing)
 - [Security](#security)
+- [Changelog](#changelog)
 - [Contributing](#contributing)
 - [Credits](#credits)
 - [License](#license)
@@ -164,7 +167,7 @@ public function toHipChat($notifiable)
 
 ### Available methods
 
-### `HipChatMessage`
+#### `HipChatMessage`
 - `create()`: Creates a new `HipChatMessage` instance.
 - `room()`: Sets the id or name of the HipChat room to send the notification to.
 - `from()`: Sets the optional label to be shown in addition to the sender's name.
@@ -199,7 +202,7 @@ public function toHipChat($notifiable)
 - `style()`: Sets the style of the attribute. See `CardAttributeStyles` for allowed values.
 - `icon()`: Sets the icon of the attribute.
 
-### `HipChatFile`
+#### `HipChatFile`
 - `create()`: Creates a new `HipChatFile` instance.
 - `room()`: Sets the id or name of the HipChat room to share the file in.
 - `path()`: Sets the `fileContent` to the resource of the existing file and tries to detect and set the `fileName` and `fileType` if they weren't explicitely set.
