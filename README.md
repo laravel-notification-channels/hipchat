@@ -14,9 +14,9 @@ This package makes it easy to send [HipChat notifications](https://www.hipchat.c
 ## Contents
 
 - [Installation](#installation)
-	- [Setting up the HipChat Service](#setting-up-the-hipchat-service)
+    - [Setting up the HipChat Service](#setting-up-the-hipchat-service)
 - [Usage](#usage)
-	- [Sending a simple room notification](#sending-a-simple-room-notification)
+    - [Sending a simple room notification](#sending-a-simple-room-notification)
     - [Sending a room notification with a card](#sending-a-room-notification-with-a-card)
     - [Sharing a file in a HipChat room](#sharing-a-file-in-a-hipchat-room)
     - [Available methods](#available-methods)
