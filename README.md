@@ -84,7 +84,7 @@ class UserRegistered extends Notification
         return HipChatMessage::create()
             ->room('New Registrations')
             ->html("<strong>A new user has registered!</strong>")
-            ->sucess()
+            ->success()
             ->notify();
     }
 }
