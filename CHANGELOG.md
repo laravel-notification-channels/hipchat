@@ -2,11 +2,11 @@
 
 ## [Unreleased]
 
-## [0.2.0](https://github.com/laravel-notification-channels/hipchat/tag/v0.2.0) - 2017-01-30
+## [0.2.0](https://github.com/laravel-notification-channels/hipchat/releases/tag/0.2.0) - 2017-01-30
 ### Changed
 - Updated dependencies to support Laravel 5.4
 
-## [0.1.0](https://github.com/laravel-notification-channels/hipchat/tag/v0.1.0) - 2016-08-24
+## [0.1.0](https://github.com/laravel-notification-channels/hipchat/releases/tag/0.1.0) - 2016-08-24
 ### Added
 - Added HipChat card support to `HipChatMessage`. See https://developer.atlassian.com/hipchat/guide/sending-messages#SendingMessages-UsingCards.
 - Added tests for `HipChatChannel`.
@@ -18,20 +18,20 @@
 - Allowed usage of the laravel-notification-channels/backport package, to use this notification channel with Laravel 5.1 and 5.2.
 - Updated tests.
 
-## [0.0.4](https://github.com/laravel-notification-channels/hipchat/tag/v0.0.4) - 2016-08-22
+## [0.0.4](https://github.com/laravel-notification-channels/hipchat/releases/tag/0.0.4) - 2016-08-22
 ### Added
 - Added file sharing capability.
 
 ### Changed
 - Allow set the content when using `text()` or `html()` on `HipChatMessage`. 
 
-## [0.0.3](https://github.com/laravel-notification-channels/hipchat/tag/v0.0.3) - 2016-08-15
+## [0.0.3](https://github.com/laravel-notification-channels/hipchat/releases/tag/0.0.3) - 2016-08-15
 #### Fixed
 - Fixed config parameters casing.
 
-## [0.0.2](https://github.com/laravel-notification-channels/hipchat/tag/v0.0.2) - 2016-08-15
+## [0.0.2](https://github.com/laravel-notification-channels/hipchat/releases/tag/0.0.2) - 2016-08-15
 #### Added
 - Added `create` method for `HipChatMessage`.
 
-## [0.0.1](https://github.com/laravel-notification-channels/hipchat/tag/v0.0.1) - 2016-08-15
+## [0.0.1](https://github.com/laravel-notification-channels/hipchat/releases/tag/0.0.1) - 2016-08-15
 - Experimental release
