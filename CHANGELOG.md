@@ -4,7 +4,7 @@
 
 ## [0.2.0](https://github.com/laravel-notification-channels/hipchat/tag/v0.2.0) - 2017-01-30
 ### Changed
-- Updated dependencies to support Laravel 5.4 and Scout 3.0
+- Updated dependencies to support Laravel 5.4
 
 ## [0.1.0](https://github.com/laravel-notification-channels/hipchat/tag/v0.1.0) - 2016-08-24
 ### Added
