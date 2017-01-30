@@ -4,8 +4,8 @@ namespace NotificationChannels\HipChat\Test;
 
 use NotificationChannels\HipChat\Card;
 use NotificationChannels\HipChat\CardStyles;
-use NotificationChannels\HipChat\HipChatMessage;
 use NotificationChannels\HipChat\MessageColors;
+use NotificationChannels\HipChat\HipChatMessage;
 
 class HipChatMessageTest extends \PHPUnit_Framework_TestCase
 {

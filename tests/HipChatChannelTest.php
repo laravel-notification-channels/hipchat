@@ -4,10 +4,10 @@ namespace NotificationChannels\HipChat\Test;
 
 use Mockery;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Notifications\Notification;
 use NotificationChannels\HipChat\HipChat;
-use NotificationChannels\HipChat\HipChatChannel;
+use Illuminate\Notifications\Notification;
 use NotificationChannels\HipChat\HipChatFile;
+use NotificationChannels\HipChat\HipChatChannel;
 use NotificationChannels\HipChat\HipChatMessage;
 
 class HipChatChannelTest extends \PHPUnit_Framework_TestCase

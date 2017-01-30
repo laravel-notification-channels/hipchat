@@ -3,10 +3,10 @@
 namespace NotificationChannels\HipChat\Test;
 
 use NotificationChannels\HipChat\Card;
+use NotificationChannels\HipChat\CardStyles;
+use NotificationChannels\HipChat\CardFormats;
 use NotificationChannels\HipChat\CardAttribute;
 use NotificationChannels\HipChat\CardAttributeStyles;
-use NotificationChannels\HipChat\CardFormats;
-use NotificationChannels\HipChat\CardStyles;
 
 class CardTest extends \PHPUnit_Framework_TestCase
 {

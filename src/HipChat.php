@@ -2,11 +2,11 @@
 
 namespace NotificationChannels\HipChat;
 
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Client as HttpClient;
 use GuzzleHttp\Psr7\MultipartStream;
-use GuzzleHttp\Psr7\Request;
-use function GuzzleHttp\Psr7\modify_request;
 use function GuzzleHttp\Psr7\stream_for;
+use function GuzzleHttp\Psr7\modify_request;
 
 class HipChat
 {

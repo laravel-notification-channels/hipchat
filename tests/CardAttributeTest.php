@@ -2,8 +2,8 @@
 
 namespace NotificationChannels\HipChat\Test;
 
-use NotificationChannels\HipChat\CardAttributeStyles;
 use NotificationChannels\HipChat\CardAttribute;
+use NotificationChannels\HipChat\CardAttributeStyles;
 
 class CardAttributeTest extends \PHPUnit_Framework_TestCase
 {
