@@ -56,6 +56,16 @@ class HipChat
     }
 
     /**
+     * Set the HipChat token to use.
+     *
+     * @param string
+     */
+    public function token($token)
+    {
+        $this->token = $token;
+    }
+
+    /**
      * Send a message.
      *
      * @param string|int $to

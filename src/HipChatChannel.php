@@ -50,6 +50,10 @@ class HipChatChannel
             throw CouldNotSendNotification::missingTo();
         }
 
+        if (! is_null($message->token)) {
+            $this->hipChat->token($message->token);
+        }
+
         try {
             $this->sendMessage($to, $message);
         } catch (ClientException $exception) {
