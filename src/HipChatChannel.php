@@ -49,6 +49,10 @@ class HipChatChannel
         if (! $to = $to ?: $this->hipChat->room()) {
             throw CouldNotSendNotification::missingTo();
         }
+        
+        if (! is_null($message->token)) {
+            $this->hipChat->token($message->token);
+        }
 
         try {
             $this->sendMessage($to, $message);
