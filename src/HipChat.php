@@ -54,7 +54,7 @@ class HipChat
     {
         return $this->url;
     }
-    
+
     /**
      * Set the HipChat token to use.
      *
@@ -64,7 +64,7 @@ class HipChat
     {
         $this->token = $token;
     }
-    
+
     /**
      * Send a message.
      *
