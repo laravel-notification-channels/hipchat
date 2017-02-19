@@ -12,6 +12,13 @@ class HipChatMessage
     public $room = '';
 
     /**
+     * The HipChat API token.
+     *
+     * @var string
+     */
+    public $token = null;
+
+    /**
      * A label to be shown in addition to the sender's name.
      *
      * @var string
@@ -101,6 +108,19 @@ class HipChatMessage
     public function room($room)
     {
         $this->room = $room;
+
+        return $this;
+    }
+
+    /**
+     * Set the HipChat token to use for this message.
+     *
+     * @param string $token
+     * @return $this
+     */
+    public function token($token)
+    {
+        $this->token = $token;
 
         return $this;
     }
