@@ -9,7 +9,7 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/hipchat/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/hipchat/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/hipchat.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/hipchat)
 
-This package makes it easy to send [HipChat notifications](https://www.hipchat.com) with Laravel 5.3.
+This package makes it easy to send [HipChat notifications](https://www.hipchat.com) with Laravel 5.3+.
 
 ## Contents
 
@@ -35,7 +35,7 @@ You can install the package via composer:
 composer require laravel-notification-channels/hipchat
 ```
 
-You must install the service provider:
+If you're using Laravel < 5.5 or if you have package auto-discovery turned off you have to manually register the service provider:
 
 ```php
 // config/app.php
