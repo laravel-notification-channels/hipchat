@@ -2,9 +2,13 @@
 
 ## [Unreleased]
 
+## [1.0.0](https://github.com/laravel-notification-channels/hipchat/releases/tag/1.0.0) - 2017-09-02
+### Added
+- Added Laravel 5.5 support including package auto discovery.
+
 ## [0.2.0](https://github.com/laravel-notification-channels/hipchat/releases/tag/0.2.0) - 2017-01-30
-### Changed
-- Updated dependencies to support Laravel 5.4
+### Added
+- Added Laravel 5.4 support.
 
 ## [0.1.0](https://github.com/laravel-notification-channels/hipchat/releases/tag/0.1.0) - 2016-08-24
 ### Added
