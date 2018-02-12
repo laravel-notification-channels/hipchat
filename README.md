@@ -44,6 +44,7 @@ If you're using Laravel < 5.5 or if you have package auto-discovery turned off y
     NotificationChannels\HipChat\HipChatServiceProvider::class,
 ],
 ```
+
 ### Setting up the HipChat service
 
 Add your HipChat Account Token and optionally the default room and Hipchat API server's base url to your `config/services.php`:
@@ -91,6 +92,7 @@ class UserRegistered extends Notification
 ```
 
 ### Sending a room notification with a card
+
 Read more about HipChat notification cards [here](https://developer.atlassian.com/hipchat/guide/sending-messages#SendingMessages-UsingCards).
 
 ```php
@@ -168,6 +170,7 @@ public function toHipChat($notifiable)
 ### Available methods
 
 #### `HipChatMessage`
+
 - `create()`: Creates a new `HipChatMessage` instance.
 - `room()`: Sets the id or name of the HipChat room to send the notification to.
 - `from()`: Sets the optional label to be shown in addition to the sender's name.
@@ -181,6 +184,7 @@ public function toHipChat($notifiable)
 - `error()`: Sets notification level to `info` and color to `MessageColors::RED`.
 
 #### `Card`
+
 - `create()`: Creates a new `Card` instance.
 - `title()`: Sets the title of the card.
 - `id()`: Sets the id of the card.
@@ -195,6 +199,7 @@ public function toHipChat($notifiable)
 - `addAttribute()`: Adds a `CardAttribute` to the card.
 
 #### `CardAttribute`
+
 - `create()`: Creates a new `CardAttribute` instance.
 - `value()`: Sets the textual value of the attribute.
 - `label()`: Sets the label of the attribute.
@@ -203,6 +208,7 @@ public function toHipChat($notifiable)
 - `icon()`: Sets the icon of the attribute.
 
 #### `HipChatFile`
+
 - `create()`: Creates a new `HipChatFile` instance.
 - `room()`: Sets the id or name of the HipChat room to share the file in.
 - `path()`: Sets the `fileContent` to the resource of the existing file and tries to detect and set the `fileName` and `fileType` if they weren't explicitely set.
