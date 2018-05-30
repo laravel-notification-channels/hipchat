@@ -59,4 +59,39 @@ class CardAttributeTest extends \PHPUnit_Framework_TestCase
             ],
         ], $attribute->toArray());
     }
+
+    public function test_it_allows_empty_values_in_attributes()
+    {
+        $attribute = CardAttribute::create()
+            ->value(0)
+            ->label('Signups today');
+
+        $this->assertEquals([
+            'value' => [
+                'label' => '0',
+            ],
+            'label' => 'Signups today',
+        ], $attribute->toArray());
+    }
+
+    public function test_it_allows_empty_values_in_create()
+    {
+        $attribute = CardAttribute::create(0, 'Signups today');
+
+        $this->assertEquals([
+            'value' => [
+                'label' => '0',
+            ],
+            'label' => 'Signups today',
+        ], $attribute->toArray());
+
+        $attribute = new CardAttribute(0, 'Signups today');
+
+        $this->assertEquals([
+            'value' => [
+                'label' => '0',
+            ],
+            'label' => 'Signups today',
+        ], $attribute->toArray());
+    }
 }

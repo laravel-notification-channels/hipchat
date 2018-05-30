@@ -110,11 +110,11 @@ class CardAttribute
      */
     public function __construct($value = null, $label = null)
     {
-        if (! empty($value)) {
+        if (trim($value) !== '') {
             $this->value($value);
         }
 
-        if (! empty($label)) {
+        if (trim($label) !== '') {
             $this->label($label);
         }
     }
@@ -138,14 +138,18 @@ class CardAttribute
                 'label' => $this->value,
                 'url' => $this->url,
                 'style' => $this->style,
-            ]),
+            ], function ($value) {
+                return trim($value) !== '';
+            }),
         ];
 
         if (! empty($this->icon)) {
             $attribute['value']['icon'] = array_filter([
                 'url' => $this->icon,
                 'url@2x' => $this->icon2,
-            ]);
+            ], function ($value) {
+                return trim($value) !== '';
+            });
         }
 
         if (! empty($this->label)) {
