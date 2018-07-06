@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.1.0](https://github.com/laravel-notification-channels/hipchat/releases/tag/2.1.0) - 2018-07-06
+
+### Added
+
+- Added more test coverage
+
+### Fixed
+
+- Fixed issues with handling falsey string input
+
 ## [2.0.0](https://github.com/laravel-notification-channels/hipchat/releases/tag/2.0.0) - 2018-02-12
 
 ### Added
