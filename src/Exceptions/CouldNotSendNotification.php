@@ -16,10 +16,11 @@ class CouldNotSendNotification extends Exception
      */
     public static function hipChatRespondedWithAnError(ClientException $exception)
     {
-        $code = $exception->getResponse()->getStatusCode();
-        $message = $exception->getResponse()->getBody();
-
-        return new static("HipChat responded with an error `{$code} - {$message}`");
+        return new static(sprintf(
+            'HipChat responded with an error %s - %s',
+            $exception->getResponse()->getStatusCode(),
+            $exception->getResponse()->getBody()
+        ));
     }
 
     /**
@@ -40,9 +41,11 @@ class CouldNotSendNotification extends Exception
      */
     public static function invalidMessageObject($message)
     {
-        $class = get_class($message) ?: 'Unknown';
-
-        return new static('Notification was not sent. The message should be an instance of or extend '.HipChatMessage::class.". `Given {$class}` is invalid.");
+        return new static(sprintf(
+            'Notification was not sent. The message should be an instance of or extend %s. Given % is invalid.',
+            HipChatMessage::class,
+            get_class($message) ?: 'Unknown'
+        ));
     }
 
     /**
@@ -50,8 +53,8 @@ class CouldNotSendNotification extends Exception
      *
      * @return static
      */
-    public static function internalError()
+    public static function internalError($exception = null)
     {
-        return new static("Couldn't connect to HipChat API.");
+        return new static("Error occurred while sending the message.", 0, $exception);
     }
 }
