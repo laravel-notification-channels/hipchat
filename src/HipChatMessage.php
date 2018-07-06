@@ -257,7 +257,7 @@ class HipChatMessage
         }
 
         throw new InvalidArgumentException(
-            'Invalid Card type. Expected '.Card::class.' or '. Closure::class.'.'
+            'Invalid Card type. Expected '.Card::class.' or '.Closure::class.'.'
         );
     }
 

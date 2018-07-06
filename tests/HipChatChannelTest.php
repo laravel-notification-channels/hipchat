@@ -2,15 +2,15 @@
 
 namespace NotificationChannels\HipChat\Test;
 
-use Illuminate\Notifications\Notifiable;
 use Mockery;
-use NotificationChannels\HipChat\Exceptions\CouldNotSendNotification;
+use stdClass;
+use Illuminate\Notifications\Notifiable;
 use NotificationChannels\HipChat\HipChat;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\HipChat\HipChatFile;
 use NotificationChannels\HipChat\HipChatChannel;
 use NotificationChannels\HipChat\HipChatMessage;
-use stdClass;
+use NotificationChannels\HipChat\Exceptions\CouldNotSendNotification;
 
 class HipChatChannelTest extends TestCase
 {
@@ -57,7 +57,6 @@ class HipChatChannelTest extends TestCase
         $this->expectExceptionMessage(
             CouldNotSendNotification::invalidMessageObject(new stdClass())->getMessage()
         );
-
 
         $channel = new HipChatChannel($hipChat);
         $channel->send(new TestNotifiable(), new TestInvalidNotification());

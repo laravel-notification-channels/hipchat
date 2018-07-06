@@ -55,6 +55,6 @@ class CouldNotSendNotification extends Exception
      */
     public static function internalError($exception = null)
     {
-        return new static("Error occurred while sending the message.", 0, $exception);
+        return new static('Error occurred while sending the message.', 0, $exception);
     }
 }

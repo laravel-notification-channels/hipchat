@@ -356,7 +356,7 @@ class Card
         }
 
         throw new InvalidArgumentException(
-            'Invalid attribute type. Expected '.CardAttribute::class.' or '. Closure::class.'.'
+            'Invalid attribute type. Expected '.CardAttribute::class.' or '.Closure::class.'.'
         );
     }
 
