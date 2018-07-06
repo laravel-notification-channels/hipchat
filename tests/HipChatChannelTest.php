@@ -76,15 +76,6 @@ class HipChatChannelTest extends TestCase
         $channel = new HipChatChannel($hipChat);
         $channel->send(new TestNotifiable(null), new TestMessageNotification());
     }
-
-    protected function prepare()
-    {
-        $hipChat = Mockery::mock(HipChat::class);
-        $channel = new HipChatChannel($hipChat);
-        $notifiable = new TestNotifiable;
-
-        return [$channel, $hipChat, $notifiable];
-    }
 }
 
 class TestNotifiable
