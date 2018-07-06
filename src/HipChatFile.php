@@ -47,7 +47,7 @@ class HipChatFile
      */
     public function __construct($path = '')
     {
-        if (! empty($path)) {
+        if ($path !== '') {
             $this->path($path);
         }
     }
@@ -108,11 +108,13 @@ class HipChatFile
      */
     public function path($path)
     {
-        if (empty($this->fileName)) {
+        $path = trim($path);
+
+        if (str_empty($this->fileName)) {
             $this->fileName(basename($path));
         }
 
-        if (empty($this->fileType)) {
+        if (str_empty($this->fileType)) {
             $this->fileType(mime_content_type($path));
         }
 

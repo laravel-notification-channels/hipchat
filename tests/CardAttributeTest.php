@@ -5,20 +5,16 @@ namespace NotificationChannels\HipChat\Test;
 use NotificationChannels\HipChat\CardAttribute;
 use NotificationChannels\HipChat\CardAttributeStyles;
 
-class CardAttributeTest extends \PHPUnit_Framework_TestCase
+class CardAttributeTest extends TestCase
 {
-    public function test_it_can_be_instatiated()
+    public function test_it_can_be_instantiated()
     {
-        $attribute = new CardAttribute();
-
-        $this->assertInstanceOf(CardAttribute::class, $attribute);
+        $this->assertInstanceOf(CardAttribute::class, new CardAttribute());
     }
 
     public function test_it_supports_create_method()
     {
-        $attribute = CardAttribute::create();
-
-        $this->assertInstanceOf(CardAttribute::class, $attribute);
+        $this->assertInstanceOf(CardAttribute::class, CardAttribute::create());
     }
 
     public function test_it_transforms_to_array()
@@ -60,38 +56,29 @@ class CardAttributeTest extends \PHPUnit_Framework_TestCase
         ], $attribute->toArray());
     }
 
-    public function test_it_allows_empty_values_in_attributes()
+    public function test_it_allows_falsey_values_in_attributes()
     {
         $attribute = CardAttribute::create()
-            ->value(0)
-            ->label('Signups today');
+            ->value('0')
+            ->label('0');
 
         $this->assertEquals([
             'value' => [
                 'label' => '0',
             ],
-            'label' => 'Signups today',
+            'label' => '0',
         ], $attribute->toArray());
     }
 
-    public function test_it_allows_empty_values_in_create()
+    public function test_it_allows_falsey_values_in_create()
     {
-        $attribute = CardAttribute::create(0, 'Signups today');
+        $attribute = CardAttribute::create('0', '0');
 
         $this->assertEquals([
             'value' => [
                 'label' => '0',
             ],
-            'label' => 'Signups today',
-        ], $attribute->toArray());
-
-        $attribute = new CardAttribute(0, 'Signups today');
-
-        $this->assertEquals([
-            'value' => [
-                'label' => '0',
-            ],
-            'label' => 'Signups today',
+            'label' => '0',
         ], $attribute->toArray());
     }
 }

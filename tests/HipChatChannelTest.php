@@ -2,50 +2,80 @@
 
 namespace NotificationChannels\HipChat\Test;
 
-use Mockery;
 use Illuminate\Notifications\Notifiable;
+use Mockery;
+use NotificationChannels\HipChat\Exceptions\CouldNotSendNotification;
 use NotificationChannels\HipChat\HipChat;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\HipChat\HipChatFile;
 use NotificationChannels\HipChat\HipChatChannel;
 use NotificationChannels\HipChat\HipChatMessage;
+use stdClass;
 
-class HipChatChannelTest extends \PHPUnit_Framework_TestCase
+class HipChatChannelTest extends TestCase
 {
-    public function tearDown()
-    {
-        Mockery::close();
-
-        parent::tearDown();
-    }
-
     public function test_it_can_be_instantiated()
     {
-        list($channel) = $this->prepare();
-
-        $this->assertInstanceOf(HipChatChannel::class, $channel);
+        $hipChat = Mockery::mock(HipChat::class);
+        $this->assertInstanceOf(HipChatChannel::class, new HipChatChannel($hipChat));
     }
 
-    public function test_it_shares_message()
+    public function test_it_can_send_message()
     {
-        list($channel, $hipChat, $notifiable) = $this->prepare();
+        $hipChat = Mockery::mock(HipChat::class);
+        $hipChat->shouldReceive('sendMessage')
+            ->once()
+            ->with(
+                'room',
+                ['message_format' => 'text', 'color' => 'gray', 'message' => 'Foo']
+            );
 
-        $notification = new TestMessageNotification;
+        $channel = new HipChatChannel($hipChat);
+        $channel->send(new TestNotifiable(), new TestMessageNotification());
+    }
 
+    public function test_it_can_share_file()
+    {
+        $hipChat = Mockery::mock(HipChat::class);
+        $hipChat->shouldReceive('shareFile')
+            ->once()
+            ->with(
+                'room',
+                ['content' => 'foo', 'filename' => 'foo.txt', 'file_type' => '', 'message' => '']
+            );
+
+        $channel = new HipChatChannel($hipChat);
+        $channel->send(new TestNotifiable(), new TestFileNotification());
+    }
+
+    public function test_it_throws_exception_if_invalid_message_given()
+    {
+        $hipChat = Mockery::mock(HipChat::class);
         $hipChat->shouldReceive('sendMessage')->once();
 
-        $channel->send($notifiable, $notification);
+        $this->expectException(CouldNotSendNotification::class);
+        $this->expectExceptionMessage(
+            CouldNotSendNotification::invalidMessageObject(new stdClass())->getMessage()
+        );
+
+
+        $channel = new HipChatChannel($hipChat);
+        $channel->send(new TestNotifiable(), new TestInvalidNotification());
     }
 
-    public function test_it_shares_file()
+    public function test_it_throws_exception_if_room_is_missing()
     {
-        list($channel, $hipChat, $notifiable) = $this->prepare();
+        $hipChat = Mockery::mock(HipChat::class);
+        $hipChat->shouldReceive('sendMessage')->once();
+        $hipChat->shouldReceive('room')
+            ->once()
+            ->andReturn(null);
 
-        $notification = new TestFileNotification;
+        $this->expectException(CouldNotSendNotification::class);
+        $this->expectExceptionMessage(CouldNotSendNotification::missingTo()->getMessage());
 
-        $hipChat->shouldReceive('shareFile')->once();
-
-        $channel->send($notifiable, $notification);
+        $channel = new HipChatChannel($hipChat);
+        $channel->send(new TestNotifiable(null), new TestMessageNotification());
     }
 
     protected function prepare()
@@ -62,9 +92,16 @@ class TestNotifiable
 {
     use Notifiable;
 
+    public $room = 'room';
+
+    public function __construct($room = 'room')
+    {
+        $this->room = $room;
+    }
+
     public function routeNotificationForHipChat()
     {
-        return 'room';
+        return $this->room;
     }
 }
 
@@ -93,5 +130,21 @@ class TestFileNotification extends Notification
         return HipChatFile::create()
             ->fileContent('foo')
             ->fileName('foo.txt');
+    }
+}
+
+class TestInvalidNotification extends Notification
+{
+    public function via($notifiable)
+    {
+        return [HipChatChannel::class];
+    }
+
+    public function toHipChat($notifiable)
+    {
+        $object = new stdClass();
+        $object->message = 'Foo';
+
+        return $object;
     }
 }

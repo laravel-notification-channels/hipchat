@@ -4,9 +4,16 @@ namespace NotificationChannels\HipChat\Test;
 
 use NotificationChannels\HipChat\HipChatFile;
 
-class HipChatFileTest extends \PHPUnit_Framework_TestCase
+class HipChatFileTest extends TestCase
 {
-    protected $filePath = __DIR__.'/stubs/file.txt';
+    protected $filePath = 'file.txt';
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        chdir(__DIR__.'/stubs');
+    }
 
     public function test_it_can_be_instantiated()
     {
@@ -133,6 +140,34 @@ class HipChatFileTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(is_resource($file['content']));
         $this->assertEquals($this->filePath, $this->pathFromResource($file['content']));
+    }
+
+    public function test_it_allows_falsey_values_in_attributes()
+    {
+        $file = HipChatFile::create()
+            ->path('0')
+            ->fileName('0')
+            ->text('0');
+
+        $this->assertArraySubset([
+            'filename' => '0',
+            'message' => '0',
+        ], $file->toArray());
+
+        $this->assertTrue(is_resource($file->fileContent));
+        $this->assertEquals('0', $this->pathFromResource($file->fileContent));
+    }
+
+    public function test_it_allows_falsey_values_in_create()
+    {
+        $file = HipChatFile::create('0');
+
+        $this->assertArraySubset([
+            'filename' => '0',
+        ], $file->toArray());
+
+        $this->assertTrue(is_resource($file->fileContent));
+        $this->assertEquals('0', $this->pathFromResource($file->fileContent));
     }
 
     protected function pathFromResource($resource)

@@ -10,19 +10,29 @@ use function GuzzleHttp\Psr7\modify_request;
 
 class HipChat
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $token;
 
-    /** @var HttpClient */
+    /**
+     * @var HttpClient
+     */
     protected $http;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $url;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $room;
 
     /**
+     * Create a new instance.
+     *
      * @param HttpClient $http
      * @param string $token
      * @param string|null $url
@@ -90,7 +100,7 @@ class HipChat
             'filename' => $file['filename'] ?: 'untitled',
         ];
 
-        if (! empty($file['message'])) {
+        if (! str_empty($file['message'])) {
             $parts[] = [
                 'headers' => [
                     'Content-Type' => 'application/json',

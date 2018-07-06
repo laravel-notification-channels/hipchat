@@ -7,7 +7,7 @@ use NotificationChannels\HipChat\CardStyles;
 use NotificationChannels\HipChat\MessageColors;
 use NotificationChannels\HipChat\HipChatMessage;
 
-class HipChatMessageTest extends \PHPUnit_Framework_TestCase
+class HipChatMessageTest extends TestCase
 {
     public function test_it_can_be_instantiated()
     {
@@ -210,6 +210,29 @@ class HipChatMessageTest extends \PHPUnit_Framework_TestCase
             'message' => '<strong>Foo</strong>',
             'attach_to' => $id,
             'card' => $card->toArray(),
+        ], $message->toArray());
+    }
+
+    public function test_it_allows_falsey_values_in_attributes()
+    {
+        $message = HipChatMessage::create()
+            ->from('0')
+            ->text('0')
+            ->attachTo('0');
+
+        $this->assertArraySubset([
+            'from' => '0',
+            'message' => '0',
+            'attach_to' => '0',
+        ], $message->toArray());
+    }
+
+    public function test_it_allows_falsey_values_in_create()
+    {
+        $message = HipChatMessage::create('0');
+
+        $this->assertArraySubset([
+            'message' => '0',
         ], $message->toArray());
     }
 }

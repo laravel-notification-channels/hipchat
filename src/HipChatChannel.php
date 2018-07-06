@@ -2,6 +2,7 @@
 
 namespace NotificationChannels\HipChat;
 
+use Exception;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Notifications\Notification;
 use NotificationChannels\HipChat\Exceptions\CouldNotSendNotification;
@@ -54,8 +55,8 @@ class HipChatChannel
             $this->sendMessage($to, $message);
         } catch (ClientException $exception) {
             throw CouldNotSendNotification::hipChatRespondedWithAnError($exception);
-        } catch (\Exception $exception) {
-            throw CouldNotSendNotification::internalError();
+        } catch (Exception $exception) {
+            throw CouldNotSendNotification::internalError($exception);
         }
     }
 

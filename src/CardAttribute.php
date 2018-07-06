@@ -85,7 +85,7 @@ class CardAttribute
     }
 
     /**
-     * Sets the icon for the atttribute.
+     * Sets the icon for the attribute.
      *
      * @param string $icon
      * @param string|null $icon2
@@ -95,7 +95,7 @@ class CardAttribute
     {
         $this->icon = trim($icon);
 
-        if (! empty($icon2)) {
+        if (! str_empty($icon2)) {
             $this->icon2 = trim($icon2);
         }
 
@@ -110,13 +110,8 @@ class CardAttribute
      */
     public function __construct($value = null, $label = null)
     {
-        if (trim($value) !== '') {
-            $this->value($value);
-        }
-
-        if (trim($label) !== '') {
-            $this->label($label);
-        }
+        $this->value($value);
+        $this->label($label);
     }
 
     /**
@@ -134,25 +129,21 @@ class CardAttribute
     public function toArray()
     {
         $attribute = [
-            'value' => array_filter([
+            'value' => str_array_filter([
                 'label' => $this->value,
                 'url' => $this->url,
                 'style' => $this->style,
-            ], function ($value) {
-                return trim($value) !== '';
-            }),
+            ]),
         ];
 
-        if (! empty($this->icon)) {
-            $attribute['value']['icon'] = array_filter([
+        if (! str_empty($this->icon)) {
+            $attribute['value']['icon'] = str_array_filter([
                 'url' => $this->icon,
                 'url@2x' => $this->icon2,
-            ], function ($value) {
-                return trim($value) !== '';
-            });
+            ]);
         }
 
-        if (! empty($this->label)) {
+        if (! str_empty($this->label)) {
             $attribute['label'] = $this->label;
         }
 

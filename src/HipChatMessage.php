@@ -2,6 +2,9 @@
 
 namespace NotificationChannels\HipChat;
 
+use Closure;
+use InvalidArgumentException;
+
 class HipChatMessage
 {
     /**
@@ -167,7 +170,7 @@ class HipChatMessage
     {
         $this->format = 'html';
 
-        if (! empty($content)) {
+        if (! str_empty($content)) {
             $this->content($content);
         }
 
@@ -184,7 +187,7 @@ class HipChatMessage
     {
         $this->format = 'text';
 
-        if (! empty($content)) {
+        if (! str_empty($content)) {
             $this->content($content);
         }
 
@@ -235,7 +238,7 @@ class HipChatMessage
     /**
      * Sets the Card.
      *
-     * @param Card|\Closure|null $card
+     * @param Card|Closure|null $card
      * @return $this
      */
     public function card($card)
@@ -246,14 +249,16 @@ class HipChatMessage
             return $this;
         }
 
-        if ($card instanceof \Closure) {
+        if ($card instanceof Closure) {
             $card($new = new Card());
             $this->card = $new;
 
             return $this;
         }
 
-        throw new \InvalidArgumentException('Invalid Card type. Expected '.Card::class.' or '.\Closure::class.'.');
+        throw new InvalidArgumentException(
+            'Invalid Card type. Expected '.Card::class.' or '. Closure::class.'.'
+        );
     }
 
     /**
@@ -276,7 +281,7 @@ class HipChatMessage
      */
     public function toArray()
     {
-        $message = array_filter([
+        $message = str_array_filter([
             'from' => $this->from,
             'message_format' => $this->format,
             'color' => $this->color,
@@ -285,7 +290,7 @@ class HipChatMessage
             'attach_to' => $this->attachTo,
         ]);
 
-        if (! empty($this->card)) {
+        if (! is_null($this->card)) {
             $message['card'] = $this->card->toArray();
         }
 

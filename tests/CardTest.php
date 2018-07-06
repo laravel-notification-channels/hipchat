@@ -8,7 +8,7 @@ use NotificationChannels\HipChat\CardFormats;
 use NotificationChannels\HipChat\CardAttribute;
 use NotificationChannels\HipChat\CardAttributeStyles;
 
-class CardTest extends \PHPUnit_Framework_TestCase
+class CardTest extends TestCase
 {
     public function test_it_can_be_instantiated()
     {
@@ -242,6 +242,35 @@ class CardTest extends \PHPUnit_Framework_TestCase
                 'value' => 'Card content',
                 'format' => 'text',
             ],
+        ], $card->toArray());
+    }
+
+    public function test_it_allows_falsey_values_in_attributes()
+    {
+        $card = Card::create()
+            ->id(0)
+            ->title('0')
+            ->text('0');
+
+        $this->assertEquals([
+            'id' => '0',
+            'title' => '0',
+            'style' => CardStyles::APPLICATION,
+            'description' => [
+                'value' => '0',
+                'format' => 'text',
+            ],
+        ], $card->toArray());
+    }
+
+    public function test_it_allows_falsey_values_in_create()
+    {
+        $card = Card::create('0', '0');
+
+        $this->assertEquals([
+            'id' => '0',
+            'title' => '0',
+            'style' => CardStyles::APPLICATION,
         ], $card->toArray());
     }
 }

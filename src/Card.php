@@ -2,6 +2,9 @@
 
 namespace NotificationChannels\HipChat;
 
+use Closure;
+use InvalidArgumentException;
+
 class Card
 {
     /**
@@ -134,11 +137,8 @@ class Card
      */
     public function __construct($title = '', $id = '')
     {
-        if (! empty($title)) {
-            $this->title = $title;
-        }
-
-        $this->id = $id ?: str_random();
+        $this->title($title);
+        $this->id(str_empty($id) ? str_random() : $id);
     }
 
     /**
@@ -215,7 +215,7 @@ class Card
     {
         $this->format = 'text';
 
-        if (! empty($content)) {
+        if (! str_empty($content)) {
             $this->content($content);
         }
 
@@ -232,7 +232,7 @@ class Card
     {
         $this->format = 'html';
 
-        if (! empty($content)) {
+        if (! str_empty($content)) {
             $this->content($content);
         }
 
@@ -278,15 +278,15 @@ class Card
     {
         $this->thumbnail = trim($icon);
 
-        if (! empty($icon2)) {
+        if (! str_empty($icon2)) {
             $this->thumbnail2 = trim($icon2);
         }
 
-        if (! empty($width)) {
+        if (! is_null($width)) {
             $this->thumbnailWidth = $width;
         }
 
-        if (! empty($height)) {
+        if (! is_null($height)) {
             $this->thumbnailHeight = $height;
         }
 
@@ -305,11 +305,11 @@ class Card
     {
         $this->activity = trim($html);
 
-        if (! empty($icon)) {
+        if (! str_empty($icon)) {
             $this->activityIcon = trim($icon);
         }
 
-        if (! empty($icon2)) {
+        if (! str_empty($icon2)) {
             $this->activityIcon2 = trim($icon2);
         }
 
@@ -327,7 +327,7 @@ class Card
     {
         $this->icon = trim($icon);
 
-        if (! empty($icon2)) {
+        if (! str_empty($icon2)) {
             $this->icon2 = trim($icon2);
         }
 
@@ -337,7 +337,7 @@ class Card
     /**
      * Adds a CardAttribute to the card.
      *
-     * @param CardAttribute|\Closure $attribute
+     * @param CardAttribute|Closure $attribute
      * @return $this
      */
     public function addAttribute($attribute)
@@ -348,14 +348,16 @@ class Card
             return $this;
         }
 
-        if ($attribute instanceof \Closure) {
+        if ($attribute instanceof Closure) {
             $attribute($new = new CardAttribute());
             $this->attributes[] = $new;
 
             return $this;
         }
 
-        throw new \InvalidArgumentException('Invalid attribute type. Expected '.CardAttribute::class.' or '.\Closure::class.'.');
+        throw new InvalidArgumentException(
+            'Invalid attribute type. Expected '.CardAttribute::class.' or '. Closure::class.'.'
+        );
     }
 
     /**
@@ -365,7 +367,7 @@ class Card
      */
     public function toArray()
     {
-        $card = array_filter([
+        $card = str_array_filter([
             'id' => $this->id,
             'style' => $this->style,
             'format' => $this->cardFormat,
@@ -373,15 +375,15 @@ class Card
             'url' => $this->url,
         ]);
 
-        if (! empty($this->content)) {
+        if (! str_empty($this->content)) {
             $card['description'] = [
                 'value' => $this->content,
                 'format' => $this->format,
             ];
         }
 
-        if (! empty($this->thumbnail)) {
-            $card['thumbnail'] = array_filter([
+        if (! str_empty($this->thumbnail)) {
+            $card['thumbnail'] = str_array_filter([
                 'url' => $this->thumbnail,
                 'url@2x' => $this->thumbnail2,
                 'width' => $this->thumbnailWidth,
@@ -389,18 +391,18 @@ class Card
             ]);
         }
 
-        if (! empty($this->activity)) {
-            $card['activity'] = array_filter([
+        if (! str_empty($this->activity)) {
+            $card['activity'] = str_array_filter([
                 'html' => $this->activity,
-                'icon' => array_filter([
+                'icon' => str_array_filter([
                     'url' => $this->activityIcon,
                     'url@2x' => $this->activityIcon2,
                 ]),
             ]);
         }
 
-        if (! empty($this->icon)) {
-            $card['icon'] = array_filter([
+        if (! str_empty($this->icon)) {
+            $card['icon'] = str_array_filter([
                 'url' => $this->icon,
                 'url@2x' => $this->icon2,
             ]);
