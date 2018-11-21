@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.2.0](https://github.com/laravel-notification-channels/hipchat/releases/tag/v2.2.0) - 2018-11-21
+
+### Added
+
+- Streamline dependency constraints and add support for Laravel 5.7+
+
 ## [2.1.0](https://github.com/laravel-notification-channels/hipchat/releases/tag/v2.1.0) - 2018-07-06
 
 ### Added
