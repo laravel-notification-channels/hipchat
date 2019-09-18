@@ -9,7 +9,11 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/hipchat/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/hipchat/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/hipchat.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/hipchat)
 
-This package makes it easy to send [HipChat notifications](https://www.hipchat.com) with Laravel 5.3+.
+This package makes it easy to send [HipChat notifications](https://www.hipchat.com) with Laravel.
+
+# Channel Deprecated
+Hipchat was [discontinued in early 2019](https://www.atlassian.com/partnerships/slack).
+As such, this channel will no longer receive updates and is being deprecated.
 
 ## Contents
 
